@@ -8,12 +8,10 @@ include 'views/layouts/header.php';
     <div class="card-header py-3">
         <div class="row">
             <h4 class="text-primary m-0 mb-2 mb-lg-0 fw-bold col-lg-4">Đơn hàng</h4>
-            <div class="dataTables_filter col-lg-4" id="dataTable_filter">
-                <label class="form-label w-100">
-                    <input type="search" class="form-control form-control-sm w-100" aria-controls="dataTable" placeholder="Nhập mã đơn hàng">
-                </label>
+            <div class="mb-2 mb-lg-0 col-lg-4 text-end">
+                <a class="btn btn-primary btn-sm w-100 w-lg-auto" href="newOrder" role="button">Thêm đơn hàng mới</a>
             </div>
-            <div class="col-lg-4 text-lg-end text-nowrap">
+            <!-- <div class="col-lg-4 text-lg-end text-nowrap">
                 <select class="form-select form-select-sm">
                     <option selected>Tất cả</option>
                     <option value="1">Chờ xác nhận</option>
@@ -25,7 +23,7 @@ include 'views/layouts/header.php';
                     <option value="7">Đã trả hàng</option>
                     <option value="8">Thất lạc</option>
                 </select>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="card-body">
@@ -39,6 +37,7 @@ include 'views/layouts/header.php';
                         <th>Số SP</th>
                         <th>Ngày đặt</th>
                         <th>Tổng tiền (vnđ)</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,6 +49,7 @@ include 'views/layouts/header.php';
                             <td><?= $order->getTotalQuantity() ?></td>
                             <td><?= $order->getTimestamp() ?></td>
                             <td><?= formatMoney(($order->getTotalPrice())*1000, '') ?></td>
+                            <td><a class="btn btn-primary btn-sm" href="order?orderId=<?= $order->getId() ?>&pageNumber=<?= $pageNumber ?>">Xem</a></td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -57,7 +57,7 @@ include 'views/layouts/header.php';
         </div>
         <div class="row">
             <div class="col-md-6 align-self-center">
-                <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Đơn hàng 1 đến 10 trong 27</p>
+                <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Đơn hàng <?= ($pageNumber-1)*10+1 ?> đến <?= (($pageNumber-1)*10+10)>$total_orders ? $total_orders : ($pageNumber-1)*10+10 ?> trong <?= $total_orders ?></p>
             </div>
             <div class="col-md-6">
                 <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">

@@ -2,18 +2,21 @@
 require_once __DIR__ . '/models/database.php';
 define('DAO', new Database());
 
-function formatMoney($number, $suffix = 'K') {
+function formatMoney($number, $suffix = 'K')
+{
     if (!empty($number)) {
         return number_format($number, 0, ',', '.') . "{$suffix}";
     }
 }
 
-function formatOrderNumber($orderNumber) {
+function formatOrderNumber($orderNumber)
+{
     $formattedOrderNumber = str_pad($orderNumber, 8, '0', STR_PAD_LEFT);
     return $formattedOrderNumber;
 }
 
-function formatOrderStatus($orderStatus) {
+function formatOrderStatus($orderStatus)
+{
     switch ($orderStatus) {
         case 1:
             return 'Chờ xác nhận';
@@ -36,6 +39,24 @@ function formatOrderStatus($orderStatus) {
     }
 }
 
+function formatProductSize($productSize)
+{
+    switch ($productSize) {
+        case 1:
+            return 'S';
+        case 2:
+            return 'M';
+        case 3:
+            return 'L';
+        case 4:
+            return 'XL';
+        case 5:
+            return 'XXL';
+        default:
+            return $productSize;
+    }
+}
+
 $request = $_SERVER['REDIRECT_URL'];
 
 $url = explode('/', filter_var(rtrim($request, '/'), FILTER_SANITIZE_URL));
@@ -55,6 +76,35 @@ switch ($url[2]) {
 
     case 'order':
         require_once __DIR__ . '/controllers/orderController.php';
+        $orderController = new orderController();
+
+        if (isset($_GET['orderId'])) {
+            $orderController->setOrderId($_GET['orderId']);
+        } else {
+            $orderController->redirect('home');
+        }
+
+        $orderController->index($_GET['orderId']);
+        break;
+
+    case 'deleteOrderItem':
+        require_once __DIR__ . '/controllers/orderController.php';
+        $orderController = new orderController();
+
+        if (isset($_GET['orderId'])) {
+            $orderController->setOrderId($_GET['orderId']);
+            if (isset($_GET['itemId'])) {
+                $orderController->deleteOrderItem($_GET['orderId'], $_GET['itemId'], $_GET['pageNumber']);
+            } else {
+                $orderController->index($_GET['orderId']);
+            }
+        } else {
+            $orderController->redirect('home');
+        }
+        break;
+
+    case 'newOrder':
+        require_once __DIR__ . '/controllers/newOrderController.php';
         break;
 
     case 'orders':

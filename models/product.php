@@ -4,6 +4,7 @@ class product {
     private $name;
     private $price;
     private $img;
+    private $size;
     private $total_sold;
     private $total_quantity;
 
@@ -28,6 +29,9 @@ class product {
     public function getImg() {
         return $this->img;
     }
+    public function getSize() {
+        return $this->size;
+    }
     public function getTotalSold() {
         return $this->total_sold;
     }
@@ -45,6 +49,9 @@ class product {
     }
     public function setImg($img) {
         $this->img = $img;
+    }
+    public function setSize($size) {
+        $this->size = $size;
     }
     public function setTotalSold($total_sold) {
         $this->total_sold = $total_sold;
