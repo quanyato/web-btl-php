@@ -114,6 +114,20 @@ class orderController
         return $this->order_items;
     }
 
+    public function deleteOrder( $order_id, $pageNumber)
+    {
+        $result = constant('DAO')->execute('
+        DELETE FROM 
+            `order`
+        WHERE 
+            id = ' . $order_id . ';
+        ');
+
+        if ($result) {
+            $this->redirect('orders?pageNumber=' . $pageNumber);
+        }
+    }
+
     public function deleteOrderItem( $order_id, $order_item_id, $pageNumber)
     {
         $result = constant('DAO')->execute('

@@ -30,7 +30,7 @@ include 'views/layouts/header.php';
                 <div class="row align-items-center no-gutters">
                     <div class="col me-2">
                         <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>Doanh thu (Hôm nay)</span></div>
-                        <div class="text-dark fw-bold h5 mb-0"><span><?php echo $todayRevenue==0 ? 0 : formatMoney($todayRevenue) ;?></span></div>
+                        <div class="text-dark fw-bold h5 mb-0"><span><?php echo $todayRevenue==0 ? 0 : formatMoney($todayRevenue*1000, ' vnđ') ;?></span></div>
                     </div>
                     <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
                 </div>
@@ -44,7 +44,7 @@ include 'views/layouts/header.php';
                 <div class="row align-items-center no-gutters">
                     <div class="col me-2">
                         <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Doanh thu (Tháng này)</span></div>
-                        <div class="text-dark fw-bold h5 mb-0"><span><?php echo $monthlyRevenue==0 ? 0 : formatMoney($monthlyRevenue) ;?></span></div>
+                        <div class="text-dark fw-bold h5 mb-0"><span><?php echo $monthlyRevenue==0 ? 0 : formatMoney($monthlyRevenue*1000, ' vnđ') ;?></span></div>
                     </div>
                     <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
                 </div>
@@ -58,7 +58,7 @@ include 'views/layouts/header.php';
                 <div class="row align-items-center no-gutters">
                     <div class="col me-2">
                         <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Doanh thu (Năm nay)</span></div>
-                        <div class="text-dark fw-bold h5 mb-0"><span><?php echo $yearlyRevenue==0 ? 0 : formatMoney($yearlyRevenue) ;?></span></div>
+                        <div class="text-dark fw-bold h5 mb-0"><span><?php echo $yearlyRevenue==0 ? 0 : formatMoney($yearlyRevenue*1000, ' vnđ') ;?></span></div>
                     </div>
                     <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
                 </div>
@@ -99,7 +99,7 @@ include 'views/layouts/header.php';
     <div class="col-md-5">
         <div class="card shadow mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h6 class="text-warning fw-bold m-0">Tồn kho ít</h6>
+                <h6 class="text-warning fw-bold m-0">Tồn kho ít nhất</h6>
             </div>
             <div class="card-body">
                 <table class="table">

@@ -80,12 +80,3 @@ class ordersController {
         return $this->total_orders;
     }
 }
-
-$ordersController = new ordersController();
-
-$pageNumber = 1;
-if (isset($_GET['pageNumber'])) {
-    $pageNumber = $_GET['pageNumber'];
-}
-
-$ordersController->index($pageNumber);

@@ -149,4 +149,21 @@ BEGIN
 END;
 //
 
+CREATE TRIGGER trg_before_delete_order
+BEFORE DELETE ON `order`
+FOR EACH ROW
+BEGIN
+    DELETE FROM order_item WHERE order_id = OLD.id;
+    DELETE FROM payment WHERE order_id = OLD.id;
+END;
+//
+
+CREATE TRIGGER trg_after_delete_order
+AFTER DELETE ON `order`
+FOR EACH ROW
+BEGIN
+    DELETE FROM customer WHERE id = OLD.customer_id;
+END;
+//
+
 DELIMITER ;

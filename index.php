@@ -1,4 +1,17 @@
 <?php
+// remove header
+header_remove('ETag');
+header_remove('Pragma');
+header_remove('Cache-Control');
+header_remove('Last-Modified');
+header_remove('Expires');
+
+// set header
+header('Expires: Thu, 1 Jan 1970 00:00:00 GMT');
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Cache-Control: post-check=0, pre-check=0',false);
+header('Pragma: no-cache');
+
 require_once __DIR__ . '/models/database.php';
 define('DAO', new Database());
 
@@ -87,6 +100,17 @@ switch ($url[2]) {
         $orderController->index($_GET['orderId']);
         break;
 
+    case 'deleteOrder':
+        require_once __DIR__ . '/controllers/orderController.php';
+        $orderController = new orderController();
+
+        if (isset($_GET['orderId'])) {
+            $orderController->deleteOrder($_GET['orderId'], $_GET['pageNumber']);
+        } else {
+            $orderController->redirect('home');
+        }
+        break;
+
     case 'deleteOrderItem':
         require_once __DIR__ . '/controllers/orderController.php';
         $orderController = new orderController();
@@ -105,10 +129,22 @@ switch ($url[2]) {
 
     case 'newOrder':
         require_once __DIR__ . '/controllers/newOrderController.php';
+
+        $newOrderController = new newOrderController();
+        $newOrderController->addNewCustomer();
         break;
 
     case 'orders':
         require_once __DIR__ . '/controllers/ordersController.php';
+
+        $ordersController = new ordersController();
+
+        $pageNumber = 1;
+        if (isset($_GET['pageNumber'])) {
+            $pageNumber = $_GET['pageNumber'];
+        }
+
+        $ordersController->index($pageNumber);
         break;
 
     case 'test':

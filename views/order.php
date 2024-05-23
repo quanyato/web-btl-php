@@ -62,7 +62,8 @@ if (isset($_GET['pageNumber'])) {
     </div>
 
     <div class="col-12 text-center mb-5">
-        <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
+        <button type="submit" class="btn btn-primary me-0 me-sm-3 mb-3 mb-sm-0">Cập nhật thông tin</button>
+        <a class="btn btn-danger mb-3 mb-sm-0" href="deleteOrder?orderId=<?=$order->getId()?>&pageNumber=<?=$pageNumber?>">Xóa đơn hàng</a>
     </div>
 </form>
 
