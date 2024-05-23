@@ -42,86 +42,16 @@ include 'views/layouts/header.php';
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Airi Satou</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>33</td>
-                        <td>2008/11/28</td>
-                        <td>$162,700</td>
-                    </tr>
-                    <tr>
-                        <td>Angelica Ramos</td>
-                        <td>Chief Executive Officer(CEO)</td>
-                        <td>London</td>
-                        <td>47</td>
-                        <td>2009/10/09<br></td>
-                        <td>$1,200,000</td>
-                    </tr>
-                    <tr>
-                        <td>Ashton Cox</td>
-                        <td>Junior Technical Author</td>
-                        <td>San Francisco</td>
-                        <td>66</td>
-                        <td>2009/01/12<br></td>
-                        <td>$86,000</td>
-                    </tr>
-                    <tr>
-                        <td>Bradley Greer</td>
-                        <td>Software Engineer</td>
-                        <td>London</td>
-                        <td>41</td>
-                        <td>2012/10/13<br></td>
-                        <td>$132,000</td>
-                    </tr>
-                    <tr>
-                        <td>Brenden Wagner</td>
-                        <td>Software Engineer</td>
-                        <td>San Francisco</td>
-                        <td>28</td>
-                        <td>2011/06/07<br></td>
-                        <td>$206,850</td>
-                    </tr>
-                    <tr>
-                        <td>Brielle Williamson</td>
-                        <td>Integration Specialist</td>
-                        <td>New York</td>
-                        <td>61</td>
-                        <td>2012/12/02<br></td>
-                        <td>$372,000</td>
-                    </tr>
-                    <tr>
-                        <td>Bruno Nash<br></td>
-                        <td>Software Engineer</td>
-                        <td>London</td>
-                        <td>38</td>
-                        <td>2011/05/03<br></td>
-                        <td>$163,500</td>
-                    </tr>
-                    <tr>
-                        <td>Caesar Vance</td>
-                        <td>Pre-Sales Support</td>
-                        <td>New York</td>
-                        <td>21</td>
-                        <td>2011/12/12<br></td>
-                        <td>$106,450</td>
-                    </tr>
-                    <tr>
-                        <td>Cara Stevens</td>
-                        <td>Sales Assistant</td>
-                        <td>New York</td>
-                        <td>46</td>
-                        <td>2011/12/06<br></td>
-                        <td>$145,600</td>
-                    </tr>
-                    <tr>
-                        <td>Cedric Kelly</td>
-                        <td>Senior JavaScript Developer</td>
-                        <td>Edinburgh</td>
-                        <td>22</td>
-                        <td>2012/03/29<br></td>
-                        <td>$433,060</td>
-                    </tr>
+                    <?php foreach ($orders as $order) { ?>
+                        <tr>
+                            <td><?= formatOrderNumber($order->getId()) ?></td>
+                            <td><?= $order->getCustomerFullname() ?></td>
+                            <td><?= formatOrderStatus($order->getStatus()) ?></td>
+                            <td><?= $order->getTotalQuantity() ?></td>
+                            <td><?= $order->getTimestamp() ?></td>
+                            <td><?= formatMoney(($order->getTotalPrice())*1000, '') ?></td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
@@ -132,11 +62,11 @@ include 'views/layouts/header.php';
             <div class="col-md-6">
                 <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                     <ul class="pagination">
-                        <li class="page-item disabled"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+                        <li class="page-item <?php if ($pageNumber==1) echo 'disabled ' ?>"><a class="page-link" aria-label="Previous" href="<?php echo 'orders?pageNumber=1'; ?>"><span aria-hidden="true">«</span></a></li>
+                        <li class="page-item <?php if ($pageNumber==1) echo 'active ' ?>"><a class="page-link" href="<?= 'orders?pageNumber='.$prevPage; ?>"><?= $prevPage; ?></a></li>
+                        <li class="page-item <?php if (($pageNumber!=1)&&($pageNumber!=$last_page)) echo 'active '; if ($last_page<3) echo 'd-none '; ?>"><a class="page-link" href="<?= 'orders?pageNumber='.$middlePage; ?>"><?= $middlePage ?></a></li>
+                        <li class="page-item <?php if ($pageNumber==$last_page) echo 'active '; if ($last_page<2) echo 'd-none '; ?>"><a class="page-link" href="<?= 'orders?pageNumber='.$nextPage; ?>"><?= $nextPage ?></a></li>
+                        <li class="page-item <?php if ($pageNumber==$last_page) echo 'disabled ' ?>"><a class="page-link" aria-label="Next" href="<?php echo 'orders?pageNumber='.$last_page; ?>"><span aria-hidden="true">»</span></a></li>
                     </ul>
                 </nav>
             </div>

@@ -18,6 +18,7 @@ class homeController
 
     public function index()
     {
+        $todayRevenue = $monthly_revenue = $yearly_revenue = 0.0;
         $top5LeastQuantityProducts = $this->get_5_least_quantity_products();
         $top5MostSoldProducts = $this->get_5_most_sold_products();
         $todayOrders = $this->get_total_order_today();

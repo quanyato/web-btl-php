@@ -19,4 +19,4 @@ GROUP BY
     o.status,
     o.timestamp,
     o.total_price
-ORDER BY o.timestamp;
+ORDER BY o.timestamp DESC;

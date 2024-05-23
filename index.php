@@ -2,15 +2,41 @@
 require_once __DIR__ . '/models/database.php';
 define('DAO', new Database());
 
-if (!function_exists('money_format')) {
-    function money_format($number, $suffix = 'K') {
-        if (!empty($number)) {
-            return number_format($number, 0, ',', '.') . "{$suffix}";
-        }
+function formatMoney($number, $suffix = 'K') {
+    if (!empty($number)) {
+        return number_format($number, 0, ',', '.') . "{$suffix}";
     }
 }
 
-$request = $_SERVER['REQUEST_URI'];
+function formatOrderNumber($orderNumber) {
+    $formattedOrderNumber = str_pad($orderNumber, 8, '0', STR_PAD_LEFT);
+    return $formattedOrderNumber;
+}
+
+function formatOrderStatus($orderStatus) {
+    switch ($orderStatus) {
+        case 1:
+            return 'Chờ xác nhận';
+        case 2:
+            return 'Chờ lấy hàng';
+        case 3:
+            return 'Đang giao';
+        case 4:
+            return 'Đã giao';
+        case 5:
+            return 'Đơn hủy';
+        case 6:
+            return 'Đang trả hàng';
+        case 7:
+            return 'Đã trả hàng';
+        case 8:
+            return 'Thất lạc';
+        default:
+            return 'Không xác định';
+    }
+}
+
+$request = $_SERVER['REDIRECT_URL'];
 
 $url = explode('/', filter_var(rtrim($request, '/'), FILTER_SANITIZE_URL));
 
