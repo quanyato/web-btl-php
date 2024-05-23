@@ -1,0 +1,10 @@
+USE reussport;
+
+DROP TABLE IF EXISTS order_item;
+DROP TABLE IF EXISTS payment;
+DROP TABLE IF EXISTS `order`;
+DROP TABLE IF EXISTS inventory;
+DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS customer;
+
+DROP DATABASE IF EXISTS reussport;
