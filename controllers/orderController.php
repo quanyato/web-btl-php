@@ -31,7 +31,6 @@ class orderController
         $order = $this->get_order($order_id);
         $order_items = $this->get_order_item_list($order_id);
         $allProduct = $this->getAllProducts();
-
         require_once 'views/order.php';
     }
 
@@ -162,7 +161,7 @@ class orderController
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $result = constant('DAO')->execute("
             INSERT INTO order_item (order_id, sku, quantity)
-            VALUES (" . $_POST['orderId'] . ", " . $_POST['sku'] . ", " . $_POST['quantity'] . ");
+            VALUES (" . $_POST['orderId'] . ", " . $_POST['newItemSku'] . ", " . $_POST['quantity'] . ");
             ");
 
             if ($result) {

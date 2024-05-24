@@ -11,14 +11,13 @@ if (isset($_GET['pageNumber'])) {
 echo '<script>';
 echo 'var allProduct = [];';
 foreach ($allProduct as $product) {
-    echo 'allProduct.push('.json_encode($product).');';
+    echo 'allProduct.push(' . json_encode($product) . ');';
 }
-echo 'console.log(allProduct);';
 echo '</script>';
 ?>
 
 <div class="d-sm-flex justify-content-start align-items-center mb-4">
-    <a class="btn btn-primary btn-sm me-3 mb-2 mb-sm-0" href="<?php echo 'orders?pageNumber='.$pageNumber; ?>">Quay lại</a>
+    <a class="btn btn-primary btn-sm me-3 mb-2 mb-sm-0" href="<?php echo 'orders?pageNumber=' . $pageNumber; ?>">Quay lại</a>
     <h3 class="text-dark mb-0">Chi tiết đơn hàng</h3>
 </div>
 <hr>
@@ -70,12 +69,12 @@ echo '</script>';
     </div>
     <div class="col-12 col-xl-4">
         <label for="totalPrice" class="form-label">Thành tiền</label>
-        <input type="text" class="form-control" id="totalPrice" name="totalPrice" disabled value="<?php echo formatMoney(($order->getTotalPrice())*1000, ' vnđ') ?>">
+        <input type="text" class="form-control" id="totalPrice" name="totalPrice" disabled value="<?php echo formatMoney(($order->getTotalPrice()) * 1000, ' vnđ') ?>">
     </div>
 
     <div class="col-12 text-center mb-5">
         <button type="submit" class="btn btn-primary me-0 me-sm-3 mb-3 mb-sm-0">Cập nhật thông tin</button>
-        <a class="btn btn-danger mb-3 mb-sm-0" href="deleteOrder?orderId=<?=$order->getId()?>&pageNumber=<?=$pageNumber?>">Xóa đơn hàng</a>
+        <a class="btn btn-danger mb-3 mb-sm-0" href="deleteOrder?orderId=<?= $order->getId() ?>&pageNumber=<?= $pageNumber ?>">Xóa đơn hàng</a>
     </div>
 </form>
 
@@ -87,7 +86,7 @@ echo '</script>';
             <div class="mb-2 mb-lg-0 col-lg-4 text-end">
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#addProductModal">
-                Thêm sản phẩm mới
+                    Thêm sản phẩm mới
                 </button>
             </div>
         </div>
@@ -112,11 +111,11 @@ echo '</script>';
                             <td><img class="rounded-circle" src="public/<?= $orderItem->getImg() ?>" width="40"></td>
                             <td><?= $orderItem->getName() ?></td>
                             <td><?= formatProductSize($orderItem->getSize()) ?></td>
-                            <td><?= $orderItem->getPrice()*1000 ?></td>
+                            <td><?= $orderItem->getPrice() * 1000 ?></td>
                             <td><?= $orderItem->getQuantity() ?></td>
-                            <td><?= formatMoney($orderItem->getPrice()*1000*$orderItem->getQuantity(), '') ?></td>
+                            <td><?= formatMoney($orderItem->getPrice() * 1000 * $orderItem->getQuantity(), '') ?></td>
                             <td class="text-center">
-                                <a class="btn btn-danger btn-sm" role="button" href="deleteOrderItem?orderId=<?= $order->getId() ?>&itemId=<?= $orderItem->getId() ?>&pageNumber=<?=$pageNumber?>">Xóa</a>
+                                <a class="btn btn-danger btn-sm" role="button" href="deleteOrderItem?orderId=<?= $order->getId() ?>&itemId=<?= $orderItem->getId() ?>&pageNumber=<?= $pageNumber ?>">Xóa</a>
                             </td>
                         </tr>
                     <?php } ?>

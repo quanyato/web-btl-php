@@ -9,7 +9,7 @@ header_remove('Expires');
 // set header
 header('Expires: Thu, 1 Jan 1970 00:00:00 GMT');
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
-header('Cache-Control: post-check=0, pre-check=0',false);
+header('Cache-Control: post-check=0, pre-check=0', false);
 header('Pragma: no-cache');
 
 require_once __DIR__ . '/models/database.php';
@@ -107,6 +107,13 @@ switch ($url[2]) {
         $orderController->updateOrder();
         break;
 
+    case 'addOrderItem':
+        require_once __DIR__ . '/controllers/orderController.php';
+        $orderController = new orderController();
+
+        $orderController->addOrderItem();
+        break;
+
     case 'deleteOrder':
         require_once __DIR__ . '/controllers/orderController.php';
         $orderController = new orderController();
@@ -156,6 +163,13 @@ switch ($url[2]) {
 
     case 'test':
         require_once __DIR__ . '/views/test.php';
+        break;
+
+    case 'ajaxGetInventory':
+        require_once __DIR__ . '/controllers/orderController.php';
+        $orderController = new orderController();
+
+        echo json_encode($orderController->getInventoryByProductId($_GET['productId']));
         break;
 
     default:
