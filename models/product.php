@@ -7,6 +7,7 @@ class product {
     private $size;
     private $total_sold;
     private $total_quantity;
+    private $quantity_by_size;
 
     public function __construct($id, $name, $price, $img, $total_sold) {
         $this->id = $id;
@@ -38,6 +39,9 @@ class product {
     public function getTotalQuantity() {
         return $this->total_quantity;
     }
+    public function getQuantityBySize() {
+        return $this->quantity_by_size;
+    }
     public function setId($id) {
         $this->id = $id;
     }
@@ -58,5 +62,8 @@ class product {
     }
     public function setTotalQuantity($total_quantity) {
         $this->total_quantity = $total_quantity;
+    }
+    public function setQuantityBySize($size, $quantity) {
+        $this->quantity_by_size[$size] = $quantity;
     }
 }

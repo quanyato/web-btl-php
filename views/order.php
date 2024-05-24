@@ -71,12 +71,16 @@ if (isset($_GET['pageNumber'])) {
     </div>
 </form>
 
+<?php require_once 'views/layouts/addProductModal.php' ?>
 <div class="card shadow">
     <div class="card-header py-3">
         <div class="row">
             <h4 class="text-primary m-0 mb-2 mb-lg-0 fw-bold col-lg-4">Sản phẩm</h4>
             <div class="mb-2 mb-lg-0 col-lg-4 text-end">
-                <a class="btn btn-primary btn-sm w-100 w-lg-auto" href="newOrder" role="button">Thêm sản phẩm mới</a>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                Thêm sản phẩm mới
+                </button>
             </div>
         </div>
     </div>

@@ -41,7 +41,7 @@ class newOrderController
     public function addNewCustomer () {
         $result = constant('DAO')->execute("
         INSERT INTO customer (first_name, last_name, birthday, email, phone, address)
-        VALUES ('Không để trống', 'Không để trống', '1990-01-01', 'Không để trống', '0000000000', 'Không để trống');
+        VALUES ('Blank', 'Blank', '1990-01-01', 'Blank', '0000000000', 'Blank');
         ");
 
         if ($result) {

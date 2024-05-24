@@ -156,6 +156,22 @@ class orderController
         }
     }
 
+    public function addOrderItem()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $result = constant('DAO')->execute("
+            INSERT INTO order_item (order_id, sku, quantity)
+            VALUES (" . $_POST['orderId'] . ", " . $_POST['sku'] . ", " . $_POST['quantity'] . ");
+            ");
+
+            if ($result) {
+                $this->redirect('order?orderId=' . $_POST['orderId'] . '&pageNumber=' . $_POST['pageNumber']);
+            }
+        } else {
+            $this->redirect('home');
+        }
+    }
+
     public function deleteOrderItem($order_id, $order_item_id, $pageNumber)
     {
         $result = constant('DAO')->execute('
