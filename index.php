@@ -100,6 +100,13 @@ switch ($url[2]) {
         $orderController->index($_GET['orderId']);
         break;
 
+    case 'updateOrder':
+        require_once __DIR__ . '/controllers/orderController.php';
+        $orderController = new orderController();
+
+        $orderController->updateOrder();
+        break;
+
     case 'deleteOrder':
         require_once __DIR__ . '/controllers/orderController.php';
         $orderController = new orderController();

@@ -15,7 +15,11 @@ if (isset($_GET['pageNumber'])) {
 </div>
 <hr>
 
-<form class="row g-3">
+<form class="row g-3" method="POST" action="updateOrder">
+    <input class="d-none" type="number" name="orderId" value="<?= $order->getId() ?>">
+    <input class="d-none" type="number" name="customerId" value="<?= $customer->getId() ?>">
+    <input class="d-none" type="number" name="pageNumber" value="<?= $pageNumber ?>">
+
     <div class="col-md-6 col-xl-4">
         <label for="lastName" class="form-label">Họ</label>
         <input type="text" class="form-control" id="lastName" name="lastName" value="<?= $customer->getLastName() ?>">
@@ -39,7 +43,7 @@ if (isset($_GET['pageNumber'])) {
     </div>
     <div class="col-12">
         <label for="address" class="form-label">Địa chỉ</label>
-        <input type="text" class="form-control" id="addess" name="addess" value="<?= $customer->getAddress() ?>">
+        <input type="text" class="form-control" id="address" name="address" value="<?= $customer->getAddress() ?>">
     </div>
 
     <div class="col-md-6 col-xl-4">
@@ -48,7 +52,7 @@ if (isset($_GET['pageNumber'])) {
     </div>
     <div class="col-md-6 col-xl-4">
         <label for="status" class="form-label">Trạng thái</label>
-        <select class="form-select" id="status" name="status" value="<?= $order->getStatus() ?>">
+        <select class="form-select" id="status" name="status">
             <?php for ($x = 1; $x <= 8; $x++) { ?>
                 <option value="<?= $x ?>" <?= $x == $order->getStatus() ? 'selected' : '' ?>>
                     <?= formatOrderStatus($x) ?>

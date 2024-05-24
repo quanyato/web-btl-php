@@ -114,7 +114,35 @@ class orderController
         return $this->order_items;
     }
 
-    public function deleteOrder( $order_id, $pageNumber)
+    public function updateOrder()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $result = constant('DAO')->execute("
+            UPDATE `order` SET status = " . $_POST['status'] . "
+            WHERE id = " . $_POST['orderId'] . ";
+            ");
+
+            $result = constant('DAO')->execute("
+            UPDATE customer
+            SET 
+                last_name = '" . $_POST['lastName'] . "',
+                first_name = '" . $_POST['firstName'] . "',
+                birthday = '" . $_POST['birthday'] . "',
+                email = '" . $_POST['email'] . "',
+                phone = '" . $_POST['phone'] . "',
+                address = '" . $_POST['address'] . "'
+            WHERE id = " . $_POST['customerId'] . ";
+            ");
+
+            if ($result) {
+                $this->redirect('order?orderId=' . $_POST['orderId'] . '&pageNumber=' . $_POST['pageNumber']);
+            }
+        } else {
+            $this->redirect('home');
+        }
+    }
+
+    public function deleteOrder($order_id, $pageNumber)
     {
         $result = constant('DAO')->execute('
         DELETE FROM 
@@ -128,7 +156,7 @@ class orderController
         }
     }
 
-    public function deleteOrderItem( $order_id, $order_item_id, $pageNumber)
+    public function deleteOrderItem($order_id, $order_item_id, $pageNumber)
     {
         $result = constant('DAO')->execute('
         DELETE FROM 
