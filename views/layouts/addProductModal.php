@@ -12,11 +12,9 @@
                     <div class="col-md-8">
                         <label for="name" class="form-label">Tên sản phẩm</label>
                         <select class="form-select" id="productId" name="productId" onchange="">
-                            <option value="1">Dortmund</option>
-                            <option value="2">Real</option>
-                            <option value="3">Lois Griffin</option>
-                            <option value="4">Joseph Swanson</option>
-                            <option value="5">Glenn Quagmire</option>
+                        <?php foreach ($allProduct as $product) { ?>
+                            <option value="<?= $product['id'] ?>"><?= $product['name'] ?></option>
+                        <?php } ?>
                         </select>
                     </div>
                     <div class="col-md-2">

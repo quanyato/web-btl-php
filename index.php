@@ -32,21 +32,21 @@ function formatOrderStatus($orderStatus)
 {
     switch ($orderStatus) {
         case 1:
-            return 'Chờ xác nhận';
+            return '<span class="bg-secondary-subtle rounded-pill p-1 px-2">Chờ xác nhận</span>';
         case 2:
-            return 'Chờ lấy hàng';
+            return '<span class="bg-info rounded-pill p-1 px-2">Chờ lấy hàng</span>';
         case 3:
-            return 'Đang giao';
+            return '<span class="bg-primary text-white rounded-pill p-1 px-2">Đang giao</span>';
         case 4:
-            return 'Đã giao';
+            return '<span class="bg-success text-white rounded-pill p-1 px-2">Đã giao</span>';
         case 5:
-            return 'Đơn hủy';
+            return '<span class="bg-danger-subtle rounded-pill p-1 px-2">Đơn hủy</span>';
         case 6:
-            return 'Đang trả hàng';
+            return '<span class="bg-warning-subtle rounded-pill p-1 px-2">Đang trả hàng</span>';
         case 7:
-            return 'Đã trả hàng';
+            return '<span class="bg-warning text-white rounded-pill p-1 px-2">Đã trả hàng</span>';
         case 8:
-            return 'Thất lạc';
+            return '<span class="bg-danger text-white rounded-pill p-1 px-2">Thất lạc</span>';
         default:
             return 'Không xác định';
     }

@@ -8,21 +8,23 @@ class newOrderController
         exit();
     }
 
-    public function addNewPayment ($orderId) {
+    public function addNewPayment($orderId)
+    {
         $result = constant('DAO')->execute("
         INSERT INTO payment (order_id, method, is_paid)
-        VALUES (".$orderId.", 1, 0);
+        VALUES (" . $orderId . ", 1, 0);
         ");
 
         if ($result) {
-            $this->redirect('order?orderId='.$orderId.'&pageNumber=1');
+            $this->redirect('order?orderId=' . $orderId . '&pageNumber=1');
         }
     }
 
-    public function addNewOrder ($customerId) {
+    public function addNewOrder($customerId)
+    {
         $result = constant('DAO')->execute("
         INSERT INTO `order` (customer_id, status)
-        VALUES (".$customerId.", 1);
+        VALUES (" . $customerId . ", 1);
         ");
 
         if ($result) {
@@ -38,7 +40,8 @@ class newOrderController
         }
     }
 
-    public function addNewCustomer () {
+    public function addNewCustomer()
+    {
         $result = constant('DAO')->execute("
         INSERT INTO customer (first_name, last_name, birthday, email, phone, address)
         VALUES ('Blank', 'Blank', '1990-01-01', 'Blank', '0000000000', 'Blank');

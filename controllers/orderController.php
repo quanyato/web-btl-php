@@ -30,6 +30,7 @@ class orderController
         $customer = $this->get_customer($order_id);
         $order = $this->get_order($order_id);
         $order_items = $this->get_order_item_list($order_id);
+        $allProduct = $this->getAllProducts();
 
         require_once 'views/order.php';
     }
@@ -183,6 +184,39 @@ class orderController
 
         if ($result) {
             $this->redirect('order?orderId=' . $order_id . '&pageNumber=' . $pageNumber);
+        }
+    }
+
+    public function getAllProducts()
+    {
+        $allProduct = array();
+        $result = constant('DAO')->execute('
+        SELECT id, name, price
+        FROM product;
+        ');
+
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                array_push($allProduct, $row);
+            }
+            return $allProduct;
+        }
+    }
+
+    public function getInventoryByProductId($productId)
+    {
+        $inventoryByProductId = array();
+        $result = constant('DAO')->execute('
+        SELECT *
+        FROM inventory
+        WHERE product_id = ' . $productId . ';
+        ');
+
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                array_push($inventoryByProductId, $row);
+            }
+            return $inventoryByProductId;
         }
     }
 }

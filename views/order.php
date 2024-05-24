@@ -7,6 +7,14 @@ $pageNumber = 1;
 if (isset($_GET['pageNumber'])) {
     $pageNumber = $_GET['pageNumber'];
 }
+
+echo '<script>';
+echo 'var allProduct = [];';
+foreach ($allProduct as $product) {
+    echo 'allProduct.push('.json_encode($product).');';
+}
+echo 'console.log(allProduct);';
+echo '</script>';
 ?>
 
 <div class="d-sm-flex justify-content-start align-items-center mb-4">
