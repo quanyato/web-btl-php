@@ -30,6 +30,12 @@
                     <li class="nav-item">
                         <a class="nav-link <?php if ($page=="orders") echo "active";?>" href="orders"><i class="fas fa-list-ul"></i><span> Đơn hàng</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="product"><i class="fas fa-cube"></i><span>Sản phẩm</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="customer"><i class="fas fa-user"></i><span>Khách hàng</span></a>
+                    </li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
